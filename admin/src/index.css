@@ -3,6 +3,14 @@ body {
   font-family: "Metro Sans", sans-serif;
 }
 
+.container {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+}
+
 form {
   max-width: 500px;
   margin: 0 auto;
@@ -160,6 +168,25 @@ button[type="delete"] {
 
 button[type="delete"]:hover,
 input[type="delete"]:hover {
+  background: #fff;
+  color: #EC585D
+}
+
+button[type="admin"] {
+  display: block;
+  appearance: none;
+  margin-top: 10px;
+  border: 1px solid #EC585D;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  padding: 10px 20px;
+  border-radius: 4px;
+  background: #EC585D;
+  color: #FFF;
+}
+
+button[type="admin"]:hover,
+input[type="admin"]:hover {
   background: #fff;
   color: #EC585D
 }
