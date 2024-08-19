@@ -100,10 +100,7 @@ input[type="button"]:hover {
 }
 
 button[type="submit"],
-input[type="button"],
-input[type="submit"] {
-  -webkit-appearance: none;
-}
+input[type="button"]
 
 .App {
   max-width: 600px;
@@ -136,31 +133,16 @@ button {
   border-radius: 4px;
 }
 
-.navBar{
-  display: flex;
-  background-color: #563D7C;
-  padding: 6%;
-}
-a{
-  color: #CBBCE2;
-  font-size: 25px;
-  text-align: center;
-}
-
-a:hover{
-  color: #fff;
-}
-
-.escape-room{
+.escape-room {
   width: 33%;
 }
 
-.home{
-width: 33%;
+.home {
+  width: 33%;
 }
 
-.robots{
-width: 33%;
+.robots {
+  width: 33%;
 }
 
 button[type="delete"] {
@@ -179,5 +161,5 @@ button[type="delete"] {
 button[type="delete"]:hover,
 input[type="delete"]:hover {
   background: #fff;
-  color: #EC585D;
+  color: #EC585D
 }

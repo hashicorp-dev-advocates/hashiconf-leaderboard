@@ -1,11 +1,14 @@
 import { useForm } from "react-hook-form"
+import { useEffect } from 'react';
 import createTeam from "./api/leaderboard"
 
 export default function EscapeRoom() {
     const {
         register,
         handleSubmit,
-        formState: { errors }
+        reset,
+        formState,
+        formState: { errors, isSubmitSuccessful }
     } = useForm();
 
     const onSubmit = async data => {
@@ -17,10 +20,16 @@ export default function EscapeRoom() {
         }
     };
 
+    useEffect(() => {
+        if (formState.isSubmitSuccessful) {
+            reset();
+        }
+    }, [formState, reset]);
+
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
             <h1>Escape Room</h1>
-            <label>Team Name</label>
+            <label>Team name</label>
             <input
                 {...register("name", {
                     required: true,

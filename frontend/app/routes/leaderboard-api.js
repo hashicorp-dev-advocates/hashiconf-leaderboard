@@ -1,15 +1,19 @@
 import config from '../config/environment';
 
 async function GetTeams(activation) {
-    let url = encodeURI(config.leaderboardAPI + '/teams/activations/' + activation);
+  let url = encodeURI(config.leaderboardAPI + '/teams/activations/' + activation);
+  try {
     let response = await fetch(url);
     let data = await response.json();
     return data.map((model, index) => {
       let rank = index + 1;
       let time = convertTime(model.time);
-
       return { rank, ...model, time };
     });
+  } catch (error) {
+    console.log(error)
+    return [];
+  }
 }
 
 function convertTime(time) {

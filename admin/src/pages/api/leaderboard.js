@@ -9,8 +9,13 @@ export default async function createTeam(team) {
 
 export async function getTeams() {
     let url = encodeURI(process.env.REACT_APP_LEADERBOARD_API + '/teams');
-    let response = await fetch(url);
-    return await response.json();
+    try {
+        let response = await fetch(url);
+        return await response.json();
+    } catch (error) {
+        console.log(error);
+        return [];
+    }
 }
 
 export async function deleteTeam(team) {

@@ -1,4 +1,5 @@
 import { useForm } from "react-hook-form"
+import { useEffect } from 'react';
 import createTeam from "./api/leaderboard"
 
 const activation = "robots";
@@ -7,23 +8,31 @@ export default function Robots() {
   const {
     register,
     handleSubmit,
-    formState: { errors }
+    reset,
+    formState,
+    formState: { errors, isSubmitSuccessful }
   } = useForm();
 
   const onSubmit = async data => {
     data = { activation, ...data }
     let response = await createTeam(data);
     if (response.id != null) {
-      alert("Created team with ID " + response.id)
+      alert("Created team with ID " + response.id + " for workflow " + response.activation)
     } else {
       alert("Error: could not create team")
     }
   };
 
+  useEffect(() => {
+    if (formState.isSubmitSuccessful) {
+        reset();
+    }
+}, [formState, reset]);
+
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <h1>Robots</h1>
-      <label>Team Name</label>
+      <label>Team name</label>
       <input
         {...register("name", {
           required: true,
