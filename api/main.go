@@ -59,13 +59,6 @@ func main() {
 
 	r := mux.NewRouter()
 
-	// Enable CORS for all hosts
-	r.Use(cors.New(cors.Options{
-		AllowedOrigins: []string{"*"},
-		AllowedMethods: []string{"POST", "GET", "OPTIONS", "PUT", "DELETE"},
-		AllowedHeaders: []string{"Accept", "content-type", "Content-Length", "Accept-Encoding", "X-CSRF-Token", "Authorization"},
-	}).Handler)
-
 	healthHandler := handlers.NewHealth(logger, db)
 	r.HandleFunc("/health/livez", healthHandler.Liveness).Methods("GET")
 	r.HandleFunc("/health/readyz", healthHandler.Readiness).Methods("GET")
@@ -78,7 +71,17 @@ func main() {
 	r.HandleFunc("/teams/{id:[0-9]+}", teamHandler.DeleteTeam).Methods("DELETE")
 
 	logger.Info("Starting service", "bind", conf.BindAddress)
-	err = http.ListenAndServe(conf.BindAddress, r)
+
+	// Enable CORS for all hosts
+	c := cors.New(cors.Options{
+		AllowedOrigins: []string{"*"},
+		AllowedMethods: []string{"POST", "GET", "DELETE"},
+		AllowedHeaders: []string{"Accept", "content-type", "Content-Length", "Accept-Encoding", "X-CSRF-Token", "Authorization"},
+	})
+
+	handler := c.Handler(r)
+
+	err = http.ListenAndServe(conf.BindAddress, handler)
 	if err != nil {
 		logger.Error("Unable to start server", "bind", conf.BindAddress, "error", err)
 	}

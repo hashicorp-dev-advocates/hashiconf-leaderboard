@@ -162,3 +162,22 @@ width: 33%;
 .robots{
 width: 33%;
 }
+
+button[type="delete"] {
+  display: block;
+  appearance: none;
+  margin-top: 10px;
+  border: 1px solid #EC585D;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  padding: 10px 20px;
+  border-radius: 4px;
+  background: #EC585D;
+  color: #FFF;
+}
+
+button[type="delete"]:hover,
+input[type="delete"]:hover {
+  background: #fff;
+  color: #EC585D;
+}
