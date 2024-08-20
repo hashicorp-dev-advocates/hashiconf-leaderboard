@@ -10,7 +10,7 @@ export default function Robots() {
     handleSubmit,
     reset,
     formState,
-    formState: { errors, isSubmitSuccessful }
+    formState: { errors }
   } = useForm();
 
   const onSubmit = async data => {

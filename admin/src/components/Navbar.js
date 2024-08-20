@@ -16,6 +16,9 @@ const Navbar = () => {
                     <li>
                         <Link to="/robots">Robots</Link>
                     </li>
+                    <li>
+                        <Link to="/delete">DELETE</Link>
+                    </li>
                 </ul>
             </div>
         </nav>
