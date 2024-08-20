@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useAuth } from "../hooks/useAuth";
 import { useForm } from "react-hook-form"
+import { getUser } from "./api/leaderboard";
 
 export default function Home() {
   const {
@@ -14,7 +15,8 @@ export default function Home() {
   const { login } = useAuth();
 
   const onSubmit = async (e) => {
-    if (username === process.env.REACT_APP_LEADERBOARD_USERNAME && password === process.env.REACT_APP_LEADERBOARD_PASSWORD) {
+    let success = await getUser(username, password);
+    if (success) {
       await login({ username, password });
       reset();
     } else {

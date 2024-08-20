@@ -28,3 +28,16 @@ export async function deleteTeam(team) {
     }
     return true
 }
+
+export async function getUser(username, password) {
+    let url = encodeURI(process.env.REACT_APP_LEADERBOARD_API + '/login');
+    let response = await fetch(url, {
+        headers: new Headers({
+            'Authorization': 'Basic ' + btoa(username + ':' + password)
+        }),
+    });
+    if (response.status !== 200) {
+        return false
+    }
+    return true
+}
