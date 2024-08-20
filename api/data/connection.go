@@ -11,6 +11,7 @@ type Connection interface {
 	GetTeamsByActivation(activation string) (Teams, error)
 	CreateTeam(*Team) (Team, error)
 	DeleteTeam(teamID int) error
+	GetUser(username string) (Users, error)
 }
 
 type PostgresSQL struct {
@@ -116,4 +117,15 @@ func (c *PostgresSQL) DeleteTeam(teamID int) error {
 	}
 
 	return nil
+}
+
+func (c *PostgresSQL) GetUser(username string) (Users, error) {
+	users := Users{}
+
+	err := c.db.Select(&users, "SELECT * FROM users WHERE username = $1", &username)
+	if err != nil {
+		return users, err
+	}
+
+	return users, nil
 }

@@ -56,3 +56,14 @@ func (c *MockConnection) DeleteTeam(teamId int) error {
 
 	return nil
 }
+
+// GetUser -
+func (c *MockConnection) GetUser(string) (Users, error) {
+	args := c.Called()
+
+	if m, ok := args.Get(0).(Users); ok {
+		return m, args.Error(1)
+	}
+
+	return nil, args.Error(1)
+}

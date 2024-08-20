@@ -9,3 +9,11 @@ CREATE TABLE teams (
     created_at TIMESTAMP NOT NULL,
     deleted_at TIMESTAMP
 );
+
+CREATE TABLE users (
+    id serial PRIMARY KEY,
+    username VARCHAR (255) NOT NULL,
+    password VARCHAR (255) NOT NULL
+);
+
+INSERT INTO users (username, password) VALUES ('admin', 'leaderboard-admin-password');

@@ -10,7 +10,7 @@ import (
 	"testing"
 
 	"github.com/gorilla/mux"
-	"github.com/hashicorp-dev-advocates/hashiconf-escape-room/leaderboard/api/data"
+	"github.com/hashicorp-dev-advocates/hashiconf-leaderboard/api/data"
 	"github.com/hashicorp/go-hclog"
 	"github.com/stretchr/testify/assert"
 )

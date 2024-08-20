@@ -7,8 +7,8 @@ import (
 	"time"
 
 	"github.com/gorilla/mux"
-	"github.com/hashicorp-dev-advocates/hashiconf-escape-room/leaderboard/api/data"
-	"github.com/hashicorp-dev-advocates/hashiconf-escape-room/leaderboard/api/handlers"
+	"github.com/hashicorp-dev-advocates/hashiconf-leaderboard/api/data"
+	"github.com/hashicorp-dev-advocates/hashiconf-leaderboard/api/handlers"
 	"github.com/hashicorp/go-hclog"
 	"github.com/nicholasjackson/env"
 	"github.com/rs/cors"
@@ -62,6 +62,9 @@ func main() {
 	healthHandler := handlers.NewHealth(logger, db)
 	r.HandleFunc("/health/livez", healthHandler.Liveness).Methods("GET")
 	r.HandleFunc("/health/readyz", healthHandler.Readiness).Methods("GET")
+
+	authHandler := handlers.NewAuth(db, logger)
+	r.HandleFunc("/login", authHandler.Login).Methods("GET")
 
 	teamHandler := handlers.NewTeam(db, logger)
 	r.HandleFunc("/teams", teamHandler.GetTeams).Methods("GET")

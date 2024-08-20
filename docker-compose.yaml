@@ -28,6 +28,14 @@ services:
         ipv4_address: 10.5.0.5
     ports:
       - 8080:80
+  admin:
+    build: ./admin
+    image: leaderboard-admin
+    networks:
+      vpcbr:
+        ipv4_address: 10.5.0.6
+    ports:
+      - 3000:80
 
 networks:
   vpcbr:

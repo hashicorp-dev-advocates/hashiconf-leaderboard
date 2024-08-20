@@ -1,4 +1,4 @@
-module github.com/hashicorp-dev-advocates/hashiconf-escape-room/leaderboard/api
+module github.com/hashicorp-dev-advocates/hashiconf-leaderboard/api
 
 go 1.21.6
 
