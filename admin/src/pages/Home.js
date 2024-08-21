@@ -15,9 +15,10 @@ export default function Home() {
   const { login } = useAuth();
 
   const onSubmit = async (e) => {
-    let success = await getUser(username, password);
-    if (success) {
-      await login({ username, password });
+    let token = await getUser(username, password);
+    if (token !== null) {
+      localStorage.setItem('token', token)
+      await login({ username });
       reset();
     } else {
       alert("Could not log in. Check username or password.");

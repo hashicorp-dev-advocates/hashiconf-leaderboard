@@ -13,7 +13,7 @@ export default function EscapeRoom() {
 
     const onSubmit = async data => {
         let response = await createTeam(data);
-        if (response.id != null) {
+        if (response !== null) {
             alert("Created team with ID " + response.id + " for workflow " + response.activation)
         } else {
             alert("Error: could not create team")
