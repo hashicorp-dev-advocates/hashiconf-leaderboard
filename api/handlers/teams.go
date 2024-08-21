@@ -45,7 +45,7 @@ func (c *Team) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 }
 
 // CreateTeam creates a new order
-func (c *Team) CreateTeam(rw http.ResponseWriter, r *http.Request) {
+func (c *Team) CreateTeam(_ int, rw http.ResponseWriter, r *http.Request) {
 	c.log.Info("Handle Teams | CreateTeam")
 
 	body := data.Team{}
@@ -161,7 +161,7 @@ func (c *Team) GetTeam(rw http.ResponseWriter, r *http.Request) {
 }
 
 // DeleteTeam deletes a team
-func (c *Team) DeleteTeam(rw http.ResponseWriter, r *http.Request) {
+func (c *Team) DeleteTeam(_ int, rw http.ResponseWriter, r *http.Request) {
 	c.log.Info("Handle Teams | DeleteTeam")
 
 	vars := mux.Vars(r)

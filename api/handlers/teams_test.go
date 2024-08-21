@@ -125,7 +125,7 @@ func TestCreateTeam(t *testing.T) {
 	rb := strings.NewReader(`{"name":"NewTeam","time":201.12}`)
 	r.Body = io.NopCloser(rb)
 
-	c.CreateTeam(rw, r)
+	c.CreateTeam(0, rw, r)
 
 	assert.Equal(t, http.StatusOK, rw.Code)
 
@@ -144,7 +144,7 @@ func TestUnableToCreateTeam(t *testing.T) {
 	rb := strings.NewReader(`{"name":"NewTeam","time":null}`)
 	r.Body = io.NopCloser(rb)
 
-	c.CreateTeam(rw, r)
+	c.CreateTeam(0, rw, r)
 
 	assert.Equal(t, http.StatusInternalServerError, rw.Code)
 
@@ -206,7 +206,7 @@ func TestDelete(t *testing.T) {
 	vars := map[string]string{"id": "1"}
 	r = mux.SetURLVars(r, vars)
 
-	c.DeleteTeam(rw, r)
+	c.DeleteTeam(0, rw, r)
 
 	assert.Equal(t, http.StatusOK, rw.Code)
 	assert.Equal(t, "Deleted team", rw.Body.String())
@@ -222,7 +222,7 @@ func TestUnableToDelete(t *testing.T) {
 	vars := map[string]string{"id": "1"}
 	r = mux.SetURLVars(r, vars)
 
-	c.DeleteTeam(rw, r)
+	c.DeleteTeam(0, rw, r)
 
 	assert.Equal(t, http.StatusInternalServerError, rw.Code)
 	assert.Equal(t, "Unable to delete team\n", rw.Body.String())

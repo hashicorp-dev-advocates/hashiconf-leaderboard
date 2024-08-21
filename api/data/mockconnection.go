@@ -67,3 +67,36 @@ func (c *MockConnection) GetUser(string) (Users, error) {
 
 	return nil, args.Error(1)
 }
+
+// CreateToken -
+func (c *MockConnection) CreateToken(userID int) (Token, error) {
+	args := c.Called()
+
+	if m, ok := args.Get(0).(Token); ok {
+		return m, args.Error(1)
+	}
+
+	return Token{}, args.Error(1)
+}
+
+// GetToken -
+func (c *MockConnection) GetToken(tokenID int, userID int) (Token, error) {
+	args := c.Called()
+
+	if m, ok := args.Get(0).(Token); ok {
+		return m, args.Error(1)
+	}
+
+	return Token{}, args.Error(1)
+}
+
+// DeleteToken -
+func (c *MockConnection) DeleteToken(tokenID int, userID int) error {
+	args := c.Called()
+
+	if err, ok := args.Get(0).(error); ok {
+		return err
+	}
+
+	return nil
+}

@@ -1,6 +1,8 @@
 package data
 
 import (
+	"fmt"
+
 	"github.com/jmoiron/sqlx"
 	_ "github.com/lib/pq"
 )
@@ -12,6 +14,9 @@ type Connection interface {
 	CreateTeam(*Team) (Team, error)
 	DeleteTeam(teamID int) error
 	GetUser(username string) (Users, error)
+	CreateToken(int) (Token, error)
+	GetToken(int, int) (Token, error)
+	DeleteToken(int, int) error
 }
 
 type PostgresSQL struct {
@@ -128,4 +133,69 @@ func (c *PostgresSQL) GetUser(username string) (Users, error) {
 	}
 
 	return users, nil
+}
+
+// CreateToken creates a new token
+func (c *PostgresSQL) CreateToken(userID int) (Token, error) {
+	token := Token{}
+
+	rows, err := c.db.NamedQuery(
+		`INSERT INTO tokens (user_id, created_at) VALUES(:user_id, now()) RETURNING id;`, map[string]interface{}{
+			"user_id": userID,
+		})
+	if err != nil {
+		return token, err
+	}
+	defer rows.Close()
+
+	if rows.Next() {
+		err := rows.StructScan(&token)
+		if err != nil {
+			return token, err
+		}
+	}
+
+	return token, nil
+}
+
+// GetToken checks whether token exists
+func (c *PostgresSQL) GetToken(tokenID int, userID int) (Token, error) {
+	token := []Token{}
+
+	err := c.db.Select(&token,
+		`SELECT id, user_id FROM tokens WHERE id = $1 AND user_id = $2 AND deleted_at IS NULL;`,
+		tokenID, userID,
+	)
+	if err != nil {
+		return Token{}, err
+	}
+
+	if len(token) == 0 {
+		return Token{}, fmt.Errorf("invalid token")
+	}
+
+	return token[0], nil
+}
+
+// DeleteToken deletes an existing token in the database
+func (c *PostgresSQL) DeleteToken(tokenID int, userID int) error {
+	tx := c.db.MustBegin()
+
+	_, err := tx.NamedExec(
+		`UPDATE tokens SET deleted_at = now()
+		WHERE id = :token_id AND user_id = :user_id AND deleted_at IS NULL`, map[string]interface{}{
+			"token_id": tokenID,
+			"user_id":  userID,
+		})
+	if err != nil {
+		tx.Rollback()
+		return err
+	}
+
+	err = tx.Commit()
+	if err != nil {
+		return err
+	}
+
+	return nil
 }
