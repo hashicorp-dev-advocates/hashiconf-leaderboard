@@ -65,6 +65,7 @@ func main() {
 
 	authHandler := handlers.NewAuth(db, logger)
 	r.HandleFunc("/login", authHandler.Login).Methods("GET")
+	r.HandleFunc("/logout", authHandler.Logout).Methods("GET")
 
 	teamHandler := handlers.NewTeam(db, logger)
 	r.HandleFunc("/teams", teamHandler.GetTeams).Methods("GET")

@@ -3,6 +3,7 @@ package handlers
 import (
 	"crypto/sha256"
 	"encoding/json"
+	"fmt"
 	"net/http"
 	"time"
 
@@ -74,6 +75,21 @@ func (c *Auth) Login(rw http.ResponseWriter, r *http.Request) {
 	http.Error(rw, "Unable to authenticate user", http.StatusUnauthorized)
 }
 
+// Logout signs out a user and invalidates a JWT token
+func (c *Auth) Logout(rw http.ResponseWriter, r *http.Request) {
+	c.log.Info("Handle Auth | Logout")
+
+	authToken := r.Header.Get("Authorization")
+
+	if err := c.invalidateJWTToken(authToken); err != nil {
+		c.log.Error("Unable to sign out user", "error", err)
+		http.Error(rw, "Unable to sign out user", http.StatusInternalServerError)
+		return
+	}
+
+	fmt.Fprintf(rw, "%s", "Signed out user")
+}
+
 func (c *Auth) generateJWTToken(userID int, username string) (string, error) {
 	t, err := c.con.CreateToken(userID)
 	if err != nil {
@@ -87,6 +103,17 @@ func (c *Auth) generateJWTToken(userID int, username string) (string, error) {
 	})
 
 	return token.SignedString([]byte(jwtSecret))
+}
+
+func (c *Auth) invalidateJWTToken(authToken string) error {
+	tokenID, userID, err := ExtractJWT(authToken)
+	if err != nil {
+		return err
+	}
+	if err = c.con.DeleteToken(tokenID, userID); err != nil {
+		return err
+	}
+	return nil
 }
 
 // ExtractJWT retrieves the token and user ID from the JWT

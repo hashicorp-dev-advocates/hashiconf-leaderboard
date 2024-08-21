@@ -16,4 +16,11 @@ CREATE TABLE users (
     password VARCHAR (255) NOT NULL
 );
 
-INSERT INTO users (username, password) VALUES ('admin', 'leaderboard-admin-password');
+CREATE TABLE tokens (
+    id serial PRIMARY KEY,
+    user_id int references users(id),
+    created_at TIMESTAMP NOT NULL,
+    deleted_at TIMESTAMP
+);
+
+INSERT INTO users (username, password) VALUES ('admin', 'test123');
