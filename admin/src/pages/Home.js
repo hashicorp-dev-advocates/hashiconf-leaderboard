@@ -20,7 +20,7 @@ export default function Home() {
       await login({ username, password });
       reset();
     } else {
-      alert("Invalid username or password");
+      alert("Could not log in. Check username or password.");
     }
   };
 
