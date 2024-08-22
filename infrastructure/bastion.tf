@@ -52,12 +52,17 @@ resource "aws_security_group_rule" "allow_bastion_egress" {
 }
 
 resource "aws_instance" "bastion" {
-  ami                    = data.aws_ami.ubuntu.id
-  instance_type          = "t3.micro"
-  key_name               = aws_key_pair.bastion.key_name
-  user_data              = file("templates/setup.sh")
-  subnet_id              = module.vpc.public_subnets[0]
-  vpc_security_group_ids = [aws_security_group.bastion.id]
+  ami                         = data.aws_ami.ubuntu.id
+  instance_type               = "t3.micro"
+  key_name                    = aws_key_pair.bastion.key_name
+  user_data                   = file("templates/setup.sh")
+  subnet_id                   = module.vpc.public_subnets[0]
+  vpc_security_group_ids      = [aws_security_group.bastion.id]
+  associate_public_ip_address = true
+
+  metadata_options {
+    http_endpoint = "disabled"
+  }
 
   tags = {
     Name = "${var.name}-bastion"

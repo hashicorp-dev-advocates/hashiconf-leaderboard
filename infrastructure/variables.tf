@@ -44,3 +44,19 @@ variable "db_name" {
   default     = "leaderboard"
   description = "Name of database"
 }
+
+variable "github_repository" {
+  type        = string
+  description = "GitHub repository to push images"
+  default     = "hashicorp-dev-advocates/hashiconf-leaderboard"
+}
+
+variable "leaderboard_services" {
+  type        = set(string)
+  description = "List of services to create ECR repositories"
+  default = [
+    "frontend",
+    "admin",
+    "api"
+  ]
+}

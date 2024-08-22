@@ -65,6 +65,7 @@ resource "aws_db_instance" "database" {
   storage_encrypted         = true
   copy_tags_to_snapshot     = true
   backup_retention_period   = 7
+  multi_az                  = true
 
   tags = {
     Name = "${var.name}-${var.db_name}"
