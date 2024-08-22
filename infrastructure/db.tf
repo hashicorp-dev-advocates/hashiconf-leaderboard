@@ -56,7 +56,6 @@ resource "aws_db_instance" "database" {
   instance_class              = var.db_instance_class
   db_name                     = var.db_name
   identifier                  = "${var.name}-${var.db_name}"
-  manage_master_user_password = false
   username                    = random_pet.database.id
   password                    = random_password.database.result
   db_subnet_group_name        = module.vpc.database_subnet_group_name
