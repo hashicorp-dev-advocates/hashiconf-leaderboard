@@ -1,8 +1,13 @@
 #!/bin/bash
 
+sudo apt install -y wget
+
+sudo sh -c 'echo "deb https://apt.PostgreSQL.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
+wget --quiet -O - https://www.PostgreSQL.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
+
 sudo apt update
 
-sudo apt install -y postgresql
+sudo apt install -y postgresql-16
 
 mkdir -p /opt/database
 
