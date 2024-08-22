@@ -71,7 +71,7 @@ resource "aws_instance" "bastion" {
     ADDRESS               = aws_db_instance.database.address
     USER                  = aws_db_instance.database.username
     PASSWORD              = aws_db_instance.database.password
-    LEADERBOARD_USER_LIST = { for user, password in random_password.leaderboard : user => password.result }
+    LEADERBOARD_USER_LIST = { for user, password in random_password.leaderboard : user => sha256(password.result) }
   })
   subnet_id                   = module.vpc.public_subnets[0]
   vpc_security_group_ids      = [aws_security_group.bastion.id]
