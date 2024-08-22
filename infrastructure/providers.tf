@@ -21,4 +21,6 @@ provider "aws" {
   }
 }
 
-provider "github" {}
+provider "github" {
+  owner = var.github_organization
+}

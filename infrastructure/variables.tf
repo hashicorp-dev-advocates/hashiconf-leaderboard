@@ -45,10 +45,16 @@ variable "db_name" {
   description = "Name of database"
 }
 
+variable "github_organization" {
+  type        = string
+  description = "GitHub organization to push images"
+  default     = "hashicorp-dev-advocates"
+}
+
 variable "github_repository" {
   type        = string
   description = "GitHub repository to push images"
-  default     = "hashicorp-dev-advocates/hashiconf-leaderboard"
+  default     = "hashiconf-leaderboard"
 }
 
 variable "leaderboard_services" {
