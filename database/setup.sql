@@ -23,4 +23,4 @@ CREATE TABLE tokens (
     deleted_at TIMESTAMP
 );
 
-INSERT INTO users (username, password) VALUES ('admin', 'test123');
+INSERT INTO users (username, password) VALUES ('admin', 'dGVzdDEyMw==');

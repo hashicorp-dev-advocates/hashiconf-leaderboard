@@ -2,6 +2,7 @@ package handlers
 
 import (
 	"crypto/sha256"
+	"encoding/base64"
 	"encoding/json"
 	"fmt"
 	"net/http"
@@ -52,7 +53,12 @@ func (c *Auth) Login(rw http.ResponseWriter, r *http.Request) {
 		}
 
 		passwordHash := sha256.Sum256([]byte(password))
-		expectedPasswordHash := sha256.Sum256([]byte(users[0].Password))
+		data, err := base64.StdEncoding.DecodeString(users[0].Password)
+		if err != nil {
+			c.log.Error("Could not decode password in database", "error", err)
+			http.Error(rw, "Unable to decode password", http.StatusInternalServerError)
+		}
+		expectedPasswordHash := sha256.Sum256([]byte(string(data)))
 
 		if passwordHash == expectedPasswordHash {
 			tokenString, err := c.generateJWTToken(users[0].ID, users[0].Username)
