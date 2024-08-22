@@ -35,6 +35,7 @@ jobs:
         uses: aws-actions/amazon-ecr-login@v2
         with:
           registries: ${{ vars.AWS_ACCOUNT_ID }}
+          region: ${{ vars.AWS_REGION }}
 
       - name: Build, tag, and push image to Amazon ECR
         id: build-publish
