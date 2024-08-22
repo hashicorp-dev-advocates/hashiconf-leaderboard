@@ -1,5 +1,5 @@
 output "database_url" {
-  value = aws_db_instance.database.domain_fqdn
+  value = aws_db_instance.database.address
 }
 
 output "database_username" {
