@@ -1,0 +1,54 @@
+#
+name: Leaderboard frontend container
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - .github/workflows/docker-frontend.yaml
+      - frontend/**
+
+jobs:
+  build-and-push-image:
+    runs-on: ubuntu-latest
+
+    permissions:
+      id-token: write
+      contents: read
+
+    outputs:
+      full_image: ${{ steps.build-publish.outputs.full_image }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set short git commit SHA
+        run: |
+          calculatedSha=$(git rev-parse --short ${{ github.sha }})
+          echo "IMAGE_TAG=$calculatedSha" >> $GITHUB_ENV
+
+      - name: configure aws credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.AWS_ROLE }}
+          role-session-name: leaderboard-github-to-ecr
+          aws-region: ${{ vars.AWS_REGION }}
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v2
+        with:
+          registries: ${{ vars.AWS_ACCOUNT_ID }}
+
+      - name: Build, tag, and push image to Amazon ECR
+        id: build-publish
+        shell: bash
+        env:
+          ECR_REPOSITORY: ${{ vars.frontend }}
+          IMAGE_TAG: ${{ env.IMAGE_TAG }}
+        run: |
+          docker build "frontend" -f "./frontend/Dockerfile" -t "$ECR_REPOSITORY:$IMAGE_TAG"
+          docker push "$ECR_REPOSITORY:$IMAGE_TAG"
+          echo "full_image=$ECR_REPOSITORY:$IMAGE_TAG"
