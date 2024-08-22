@@ -51,11 +51,28 @@ resource "aws_security_group_rule" "allow_bastion_egress" {
   security_group_id = aws_security_group.bastion.id
 }
 
+resource "random_password" "leaderboard" {
+  for_each         = var.leaderboard_user_list
+  length           = 16
+  min_upper        = 2
+  min_lower        = 2
+  min_numeric      = 2
+  min_special      = 2
+  special          = true
+  override_special = "*%$"
+}
+
 resource "aws_instance" "bastion" {
-  ami                         = data.aws_ami.ubuntu.id
-  instance_type               = "t3.micro"
-  key_name                    = aws_key_pair.bastion.key_name
-  user_data                   = file("templates/setup.sh")
+  ami           = data.aws_ami.ubuntu.id
+  instance_type = "t3.micro"
+  key_name      = aws_key_pair.bastion.key_name
+  user_data = templatefile("templates/setup.sh", {
+    DATABASE              = aws_db_instance.database.db_name
+    ADDRESS               = aws_db_instance.database.address
+    USER                  = aws_db_instance.database.username
+    PASSWORD              = aws_db_instance.database.password
+    LEADERBOARD_USER_LIST = { for user, password in random_password.leaderboard : user => password.result }
+  })
   subnet_id                   = module.vpc.public_subnets[0]
   vpc_security_group_ids      = [aws_security_group.bastion.id]
   associate_public_ip_address = true

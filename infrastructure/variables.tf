@@ -39,6 +39,15 @@ variable "db_instance_class" {
   description = "Database instance class"
 }
 
+variable "leaderboard_user_list" {
+  type        = set(string)
+  description = "Set of usernames for leaderboard app"
+  default = [
+    "robot-admin",
+    "escape-room-admin",
+  ]
+}
+
 variable "db_name" {
   type        = string
   default     = "leaderboard"
