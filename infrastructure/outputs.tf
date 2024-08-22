@@ -14,3 +14,11 @@ output "database_password" {
 output "bastion" {
   value = aws_instance.bastion.private_ip
 }
+
+output "repositories" {
+  value = {
+    frontend = aws_ecr_repository.frontend.repository_url
+    admin    = aws_ecr_repository.admin.repository_url
+    api      = aws_ecr_repository.api.repository_url
+  }
+}
