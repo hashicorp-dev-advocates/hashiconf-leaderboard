@@ -22,3 +22,9 @@ resource "github_actions_variable" "aws_account_id" {
   variable_name = "AWS_ACCOUNT_ID"
   value         = data.aws_caller_identity.current.account_id
 }
+
+resource "github_actions_variable" "aws_region" {
+  repository    = var.github_repository
+  variable_name = "AWS_REGION"
+  value         = var.region
+}
