@@ -61,7 +61,8 @@ resource "aws_instance" "bastion" {
   associate_public_ip_address = true
 
   metadata_options {
-    http_endpoint = "disabled"
+    http_endpoint = "enabled"
+    http_tokens   = "required"
   }
 
   tags = {
