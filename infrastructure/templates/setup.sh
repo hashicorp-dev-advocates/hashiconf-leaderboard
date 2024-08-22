@@ -45,7 +45,7 @@ CREATE TABLE IF NOT EXISTS tokens (
 );
 
 %{ for user, password in LEADERBOARD_USER_LIST }
-INSERT INTO users (username, password) VALUES ('${user}', '${password}') ON CONFLICT UPDATE;
+INSERT INTO users (username, password) VALUES ('${user}', '${password}') ON CONFLICT DO UPDATE;
 %{ endfor }
 EOF
 
