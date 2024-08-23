@@ -42,7 +42,7 @@ module.exports = function (environment) {
   }
 
   if (environment === 'production') {
-    // here you can enable a production-specific feature
+    ENV.leaderboardAPI = 'https://km44b2ukpv.us-east-1.awsapprunner.com'
   }
 
   return ENV;
