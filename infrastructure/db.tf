@@ -18,12 +18,12 @@ resource "aws_security_group_rule" "allow_bastion" {
 }
 
 resource "aws_security_group_rule" "allow_database_from_vpc" {
-  type              = "ingress"
-  from_port         = 5432
-  to_port           = 5432
-  protocol          = "tcp"
-  cidr_blocks       = [module.vpc.vpc_cidr_block]
-  security_group_id = aws_security_group.database.id
+  type                     = "ingress"
+  from_port                = 5432
+  to_port                  = 5432
+  protocol                 = "tcp"
+  source_security_group_id = aws_security_group.database.id
+  security_group_id        = aws_security_group.database.id
 }
 
 resource "aws_security_group_rule" "allow_database_egress" {

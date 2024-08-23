@@ -1,5 +1,5 @@
-resource "aws_iam_role" "apprunner_build" {
-  name = "${var.name}-apprunner-build"
+resource "aws_iam_role" "apprunner" {
+  name = "${var.name}-apprunner"
 
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
@@ -9,6 +9,7 @@ resource "aws_iam_role" "apprunner_build" {
         Effect = "Allow"
         Principal = {
           Service = "build.apprunner.amazonaws.com"
+          Service = "tasks.apprunner.amazonaws.com"
         }
       },
     ]
@@ -37,25 +38,8 @@ resource "aws_iam_policy" "apprunner_ecr" {
 }
 
 resource "aws_iam_role_policy_attachment" "apprunner_ecr" {
-  role       = aws_iam_role.apprunner_build.name
+  role       = aws_iam_role.apprunner.name
   policy_arn = aws_iam_policy.apprunner_ecr.arn
-}
-
-resource "aws_iam_role" "apprunner_tasks" {
-  name = "${var.name}-apprunner-tasks"
-
-  assume_role_policy = jsonencode({
-    Version = "2012-10-17"
-    Statement = [
-      {
-        Action = "sts:AssumeRole"
-        Effect = "Allow"
-        Principal = {
-          Service = "tasks.apprunner.amazonaws.com"
-        }
-      },
-    ]
-  })
 }
 
 resource "aws_iam_policy" "apprunner_secrets" {
@@ -78,7 +62,7 @@ resource "aws_iam_policy" "apprunner_secrets" {
   })
 }
 
-resource "aws_iam_role_policy_attachment" "apprunner_tasks" {
-  role       = aws_iam_role.apprunner_tasks.name
+resource "aws_iam_role_policy_attachment" "apprunner_secrets" {
+  role       = aws_iam_role.apprunner.name
   policy_arn = aws_iam_policy.apprunner_secrets.arn
 }
