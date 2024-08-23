@@ -13,7 +13,8 @@ RUN yarn
 # Copy all our app's directories
 COPY . .
 
-ENV LEADERBOARD_API http://api:9090
+ARG LEADERBOARD_API=http://api:9090
+ENV LEADERBOARD_API=$LEADERBOARD_API
 
 RUN ember build --environment=production
 

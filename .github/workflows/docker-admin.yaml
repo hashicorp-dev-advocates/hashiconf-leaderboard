@@ -48,7 +48,8 @@ jobs:
         env:
           ECR_REPOSITORY: ${{ vars.ADMIN }}
           IMAGE_TAG: ${{ env.IMAGE_TAG }}
+          LEADERBOARD_API: ${{ vars.LEADERBOARD_API }}
         run: |
-          docker build "admin" -f "./admin/Dockerfile" -t "$ECR_REPOSITORY:$IMAGE_TAG"
+          docker build --build-arg LEADERBOARD_API=$LEADERBOARD_API "admin" -f "./admin/Dockerfile" -t "$ECR_REPOSITORY:$IMAGE_TAG"
           docker push "$ECR_REPOSITORY:$IMAGE_TAG"
           echo "full_image=$ECR_REPOSITORY:$IMAGE_TAG"
