@@ -52,3 +52,9 @@ resource "aws_apprunner_service" "api" {
     }
   }
 }
+
+resource "github_actions_variable" "leaderboard_api" {
+  repository    = var.github_repository
+  variable_name = "LEADERBOARD_API"
+  value         = "https://${aws_apprunner_service.api.service_url}"
+}
