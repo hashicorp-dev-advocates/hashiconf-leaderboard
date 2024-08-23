@@ -18,3 +18,8 @@ output "app_database" {
   }
   sensitive = true
 }
+
+output "admin_logins" {
+  value     = { for user in var.leaderboard_user_list : user => random_password.leaderboard[user].result }
+  sensitive = true
+}
