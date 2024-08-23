@@ -15,7 +15,7 @@ resource "aws_apprunner_service" "api" {
 
   source_configuration {
     authentication_configuration {
-      access_role_arn = aws_iam_role.apprunner.arn
+      access_role_arn = aws_iam_role.apprunner_build.arn
     }
 
     image_repository {
@@ -35,6 +35,10 @@ resource "aws_apprunner_service" "api" {
   health_check_configuration {
     path     = "/health/livez"
     protocol = "HTTP"
+  }
+
+  instance_configuration {
+    instance_role_arn = aws_iam_role.apprunner_tasks.arn
   }
 
   network_configuration {
