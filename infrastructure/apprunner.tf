@@ -104,7 +104,7 @@ resource "aws_apprunner_service" "admin" {
 
     image_repository {
       image_configuration {
-        port = "3000"
+        port = "80"
       }
       image_identifier      = data.aws_ecr_image.services["admin"].image_uri
       image_repository_type = "ECR"
