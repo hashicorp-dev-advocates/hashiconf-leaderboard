@@ -29,7 +29,10 @@ services:
     ports:
       - 8080:80
   admin:
-    build: ./admin
+    build:
+      context: ./admin
+      args:
+        LEADERBOARD_API: http://localhost:9090
     image: leaderboard-admin
     networks:
       vpcbr:
