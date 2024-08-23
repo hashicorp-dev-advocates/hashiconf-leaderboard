@@ -58,3 +58,73 @@ resource "github_actions_variable" "leaderboard_api" {
   variable_name = "LEADERBOARD_API"
   value         = "https://${aws_apprunner_service.api.service_url}"
 }
+
+resource "aws_apprunner_service" "frontend" {
+  service_name = "leaderboard-frontend"
+
+  source_configuration {
+    authentication_configuration {
+      access_role_arn = aws_iam_role.apprunner.arn
+    }
+
+    image_repository {
+      image_configuration {
+        port = "80"
+      }
+      image_identifier      = data.aws_ecr_image.services["frontend"].image_uri
+      image_repository_type = "ECR"
+    }
+
+    auto_deployments_enabled = true
+  }
+
+  health_check_configuration {
+    path     = "/"
+    protocol = "HTTP"
+  }
+
+  instance_configuration {
+    instance_role_arn = aws_iam_role.apprunner_tasks.arn
+  }
+
+  network_configuration {
+    ingress_configuration {
+      is_publicly_accessible = true
+    }
+  }
+}
+
+resource "aws_apprunner_service" "admin" {
+  service_name = "leaderboard-admin"
+
+  source_configuration {
+    authentication_configuration {
+      access_role_arn = aws_iam_role.apprunner.arn
+    }
+
+    image_repository {
+      image_configuration {
+        port = "3000"
+      }
+      image_identifier      = data.aws_ecr_image.services["admin"].image_uri
+      image_repository_type = "ECR"
+    }
+
+    auto_deployments_enabled = true
+  }
+
+  health_check_configuration {
+    path     = "/"
+    protocol = "HTTP"
+  }
+
+  instance_configuration {
+    instance_role_arn = aws_iam_role.apprunner_tasks.arn
+  }
+
+  network_configuration {
+    ingress_configuration {
+      is_publicly_accessible = true
+    }
+  }
+}
