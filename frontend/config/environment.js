@@ -42,7 +42,7 @@ module.exports = function (environment) {
   }
 
   if (environment === 'production') {
-    ENV.leaderboardAPI = 'https://km44b2ukpv.us-east-1.awsapprunner.com'
+    ENV.leaderboardAPI = process.env.LEADERBOARD_API
   }
 
   return ENV;
