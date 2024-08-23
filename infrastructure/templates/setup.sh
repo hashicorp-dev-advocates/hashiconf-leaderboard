@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS teams (
 
 CREATE TABLE IF NOT EXISTS users (
     id serial PRIMARY KEY,
-    username VARCHAR (255) NOT NULL,
+    username VARCHAR (255) UNIQUE NOT NULL,
     password VARCHAR (255) NOT NULL
 );
 
@@ -45,7 +45,7 @@ CREATE TABLE IF NOT EXISTS tokens (
 );
 
 %{ for user, password in LEADERBOARD_USER_LIST }
-INSERT INTO users (username, password) VALUES ('${user}', '${password}') ON CONFLICT(username) DO UPDATE SET password = '${password}';
+INSERT INTO users (username, password) VALUES ('${user}', '${password}') ON CONFLICT(username) DO NOTHING;
 %{ endfor }
 EOF
 
