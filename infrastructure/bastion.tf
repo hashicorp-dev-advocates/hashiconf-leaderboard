@@ -62,16 +62,32 @@ resource "random_password" "leaderboard" {
   override_special = "*%$"
 }
 
+resource "random_pet" "leaderboard_database" {
+  length = 2
+}
+
+resource "random_password" "leaderboard_database" {
+  length           = 24
+  min_upper        = 2
+  min_lower        = 2
+  min_numeric      = 2
+  min_special      = 1
+  special          = false
+  override_special = "*@"
+}
+
 resource "aws_instance" "bastion" {
   ami           = data.aws_ami.ubuntu.id
   instance_type = "t3.micro"
   key_name      = aws_key_pair.bastion.key_name
   user_data = templatefile("templates/setup.sh", {
-    DATABASE              = aws_db_instance.database.db_name
-    ADDRESS               = aws_db_instance.database.address
-    USER                  = aws_db_instance.database.username
-    PASSWORD              = aws_db_instance.database.password
-    LEADERBOARD_USER_LIST = { for user, password in random_password.leaderboard : user => base64encode(password.result) }
+    DATABASE                = aws_db_instance.database.db_name
+    ADDRESS                 = aws_db_instance.database.address
+    USER                    = aws_db_instance.database.username
+    PASSWORD                = aws_db_instance.database.password
+    LEADERBOARD_USER_LIST   = { for user, password in random_password.leaderboard : user => base64encode(password.result) }
+    LEADERBOARD_DB_USER     = random_pet.leaderboard_database.id
+    LEADERBOARD_DB_PASSWORD = random_password.leaderboard_database.result
   })
   subnet_id                   = module.vpc.public_subnets[0]
   vpc_security_group_ids      = [aws_security_group.bastion.id]
