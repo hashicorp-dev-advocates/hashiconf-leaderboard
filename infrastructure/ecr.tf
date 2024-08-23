@@ -28,3 +28,4 @@ resource "github_actions_variable" "aws_region" {
   variable_name = "AWS_REGION"
   value         = var.region
 }
+

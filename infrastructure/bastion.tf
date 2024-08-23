@@ -62,20 +62,6 @@ resource "random_password" "leaderboard" {
   override_special = "*%$"
 }
 
-resource "random_pet" "leaderboard_database" {
-  length = 2
-}
-
-resource "random_password" "leaderboard_database" {
-  length           = 24
-  min_upper        = 2
-  min_lower        = 2
-  min_numeric      = 2
-  min_special      = 1
-  special          = false
-  override_special = "*@"
-}
-
 resource "aws_instance" "bastion" {
   ami           = data.aws_ami.ubuntu.id
   instance_type = "t3.micro"
