@@ -1,5 +1,26 @@
 resource "aws_iam_role" "apprunner" {
   name = "${var.name}-apprunner"
+  assume_role_policy = jsonencode({
+    "Version" : "2012-10-17",
+    "Statement" : [
+      {
+        "Effect" : "Allow",
+        "Principal" : {
+          "Service" : "build.apprunner.amazonaws.com"
+        },
+        "Action" : "sts:AssumeRole"
+      }
+    ]
+  })
+}
+
+resource "aws_iam_role_policy_attachment" "apprunner_ecr" {
+  role       = aws_iam_role.apprunner.id
+  policy_arn = "arn:aws:iam::aws:policy/service-role/AWSAppRunnerServicePolicyForECRAccess"
+}
+
+resource "aws_iam_role" "apprunner_tasks" {
+  name = "${var.name}-apprunner-tasks"
 
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
@@ -8,38 +29,11 @@ resource "aws_iam_role" "apprunner" {
         Action = "sts:AssumeRole"
         Effect = "Allow"
         Principal = {
-          Service = "build.apprunner.amazonaws.com"
           Service = "tasks.apprunner.amazonaws.com"
         }
       },
     ]
   })
-}
-
-resource "aws_iam_policy" "apprunner_ecr" {
-  name = "${var.name}-apprunner-ecr"
-
-  policy = jsonencode({
-    Version = "2012-10-17"
-    Statement = [
-      {
-        Action = [
-          "ecr:GetDownloadUrlForLayer",
-          "ecr:BatchCheckLayerAvailability",
-          "ecr:BatchGetImage",
-          "ecr:DescribeImages",
-          "ecr:GetAuthorizationToken"
-        ]
-        Effect   = "Allow"
-        Resource = "*"
-      },
-    ]
-  })
-}
-
-resource "aws_iam_role_policy_attachment" "apprunner_ecr" {
-  role       = aws_iam_role.apprunner.name
-  policy_arn = aws_iam_policy.apprunner_ecr.arn
 }
 
 resource "aws_iam_policy" "apprunner_secrets" {
@@ -62,7 +56,7 @@ resource "aws_iam_policy" "apprunner_secrets" {
   })
 }
 
-resource "aws_iam_role_policy_attachment" "apprunner_secrets" {
-  role       = aws_iam_role.apprunner.name
+resource "aws_iam_role_policy_attachment" "apprunner_tasks" {
+  role       = aws_iam_role.apprunner_tasks.name
   policy_arn = aws_iam_policy.apprunner_secrets.arn
 }

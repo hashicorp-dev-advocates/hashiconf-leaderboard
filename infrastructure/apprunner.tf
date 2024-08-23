@@ -37,6 +37,10 @@ resource "aws_apprunner_service" "api" {
     protocol = "HTTP"
   }
 
+  instance_configuration {
+    instance_role_arn = aws_iam_role.apprunner_tasks.arn
+  }
+
   network_configuration {
     ingress_configuration {
       is_publicly_accessible = true
