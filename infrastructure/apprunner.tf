@@ -9,7 +9,7 @@ resource "aws_iam_role" "apprunner" {
         Action = "sts:AssumeRole"
         Effect = "Allow"
         Principal = {
-          Service = "build.apprunner.amazonaws.com"
+          Service = "tasks.apprunner.amazonaws.com"
         }
       },
     ]
@@ -38,7 +38,7 @@ resource "aws_iam_policy" "apprunner_ecr" {
 }
 
 resource "aws_iam_policy" "apprunner_secrets" {
-  name = "${var.name}-apprunner-ecr"
+  name = "${var.name}-apprunner-secrets"
 
   policy = jsonencode({
     Version = "2012-10-17"
