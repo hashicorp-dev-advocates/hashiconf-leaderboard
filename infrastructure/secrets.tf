@@ -13,7 +13,8 @@ resource "random_password" "leaderboard_database" {
 }
 
 resource "aws_secretsmanager_secret" "leaderboard_database" {
-  name = "${var.name}-leaderboard-database"
+  name                    = "${var.name}-leaderboard-database"
+  recovery_window_in_days = 7
 }
 
 resource "aws_secretsmanager_secret_version" "leaderboard_database" {
