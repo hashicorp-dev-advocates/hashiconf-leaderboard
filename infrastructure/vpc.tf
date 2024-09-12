@@ -31,3 +31,9 @@ module "vpc" {
   single_nat_gateway   = true
   enable_dns_hostnames = true
 }
+
+resource "aws_apprunner_vpc_connector" "connector" {
+  vpc_connector_name = "${var.name}-leaderboard"
+  subnets            = module.vpc.private_subnets
+  security_groups    = [aws_security_group.database.id]
+}
