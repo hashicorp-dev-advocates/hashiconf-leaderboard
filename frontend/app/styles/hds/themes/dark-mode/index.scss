@@ -9,13 +9,7 @@
 // This is the default HDS color theme.  Only Boundary custom tokens
 // are included here for completeness.
 :root {
-  // Tier-1 (Boundary custom)
-  // Boundary custom first-tier color tokens with alpha.
-  // In HDS, these correspond to the named color token,
-  // with the alpha identifier.  However, they do not have stand-alone tokens
-  // associated with them and appear hard-coded alongside other styles.
-  // They are pulled out here for easier theming.
-  --token-color-palette-neutral-600-alpha-200: #3b3d4559;
+  --token-color-palette-neutral-600-alpha-200: #15181E;
   --token-color-palette-neutral-600-alpha-100: #3b3d4540;
   --token-color-palette-neutral-500-alpha-200: #656a7640;
   --token-color-palette-neutral-500-alpha-100: #656a7626;

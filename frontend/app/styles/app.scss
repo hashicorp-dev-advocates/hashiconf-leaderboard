@@ -13,6 +13,31 @@
   padding: 0;
 }
 
+.robot {
+  background: -webkit-linear-gradient(left, #FF5E63, #FFEC6E, #FFFFFF, #48C8FF, #627EEF, #A067DA);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.robot-frame {
+  background-image: -webkit-linear-gradient(left, #FF5E63, #FFEC6E, #FFFFFF, #48C8FF, #627EEF, #A067DA);
+  background-origin: border-box;
+  border: 1px solid transparent; /* optional */
+}
+
+footer {
+  height: 100px;
+  width:100%;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+}
+
+.robot-footer {
+  background-image: url(images/robots.png);
+  background-size: cover;
+}
+
 body,
 h1,
 h2,

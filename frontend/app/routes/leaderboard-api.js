@@ -5,7 +5,7 @@ async function GetTeams(activation) {
   try {
     let response = await fetch(url);
     let data = await response.json();
-    return data.map((model, index) => {
+    return data.slice(0,10).map((model, index) => {
       let rank = index + 1;
       let time = convertTime(model.time);
       return { rank, ...model, time };
