@@ -13,8 +13,10 @@
   padding: 0;
 }
 
-.robot {
-  background: linear-gradient(to right, #FF5E63, #FFEC6E, #FFFFFF, #48C8FF, #627EEF, #A067DA);
+.robot-header {
+  text-align: center;
+  font-size: 36px;
+  background: linear-gradient(to right, #FF5E63 40%, #FFEC6E 45%, #FFFFFF 50%, #48C8FF 55%, #627EEF 60%, #A067DA 100%);
   -webkit-background-clip: text;
   -moz-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -22,9 +24,8 @@
 }
 
 .robot-frame {
-  background-image: linear-gradient(to right, #FF5E63, #FFEC6E, #FFFFFF, #48C8FF, #627EEF, #A067DA);
-  background-origin: border-box;
-  border: 1px solid transparent; /* optional */
+  padding: 20px;
+  border: 0px;
 }
 
 footer {
@@ -33,6 +34,15 @@ footer {
   position: absolute;
   left: 0;
   bottom: 0;
+}
+
+.robot-box {
+  box-sizing: border-box;
+  background: #000;
+  border-radius: 20px;
+  background: linear-gradient(#000, #000) padding-box,
+              linear-gradient(to right bottom, #FF5E63, #FFEC6E, #FFFFFF, #48C8FF, #627EEF, #A067DA) border-box;
+  border: 1px solid transparent;
 }
 
 .robot-footer {
