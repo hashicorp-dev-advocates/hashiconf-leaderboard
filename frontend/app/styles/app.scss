@@ -14,13 +14,15 @@
 }
 
 .robot {
-  background: -webkit-linear-gradient(left, #FF5E63, #FFEC6E, #FFFFFF, #48C8FF, #627EEF, #A067DA);
+  background: linear-gradient(to right, #FF5E63, #FFEC6E, #FFFFFF, #48C8FF, #627EEF, #A067DA);
   -webkit-background-clip: text;
+  -moz-background-clip: text;
   -webkit-text-fill-color: transparent;
+  -moz-text-fill-color: transparent;
 }
 
 .robot-frame {
-  background-image: -webkit-linear-gradient(left, #FF5E63, #FFEC6E, #FFFFFF, #48C8FF, #627EEF, #A067DA);
+  background-image: linear-gradient(to right, #FF5E63, #FFEC6E, #FFFFFF, #48C8FF, #627EEF, #A067DA);
   background-origin: border-box;
   border: 1px solid transparent; /* optional */
 }
@@ -36,6 +38,69 @@ footer {
 .robot-footer {
   background-image: url(images/robots.png);
   background-size: cover;
+}
+
+.escape-room-background {
+  background-image: url(images/escape-room.png);
+  background-size: cover;
+}
+
+.escape-room-header {
+  text-align: center;
+  font-size: 36px;
+}
+
+.escape-room-ilm-header {
+  text-align: center;
+  font-size: 24px;
+  background: linear-gradient(to right, #FFFFFF, #B0FFFF, #8FD0FF, #C796FF);
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -moz-text-fill-color: transparent;
+}
+
+.escape-room-slm-header {
+  text-align: center;
+  font-size: 24px;
+  background: linear-gradient(to right, #FFFFFF, #FFF4AC, #FFAC99, #FF89A1);
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -moz-text-fill-color: transparent;
+}
+
+.escape-room-row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  column-gap: 30px;
+}
+
+.escape-room-ilm-column {
+  flex: 1;
+  box-sizing: border-box;
+  background: #000;
+  border-radius: 20px;
+  background: linear-gradient(#000, #000) padding-box,
+              linear-gradient(90deg, #FFFFFF, #B0FFFF, #8FD0FF, #C796FF) border-box;
+  border: 1px solid transparent;
+}
+
+.escape-room-slm-column {
+  flex: 1;
+  box-sizing: border-box;
+  background: #000;
+  border-radius: 20px;
+  background: linear-gradient(#000, #000) padding-box,
+              linear-gradient(90deg,#FFFFFF, #FFF4AC, #FFAC99, #FF89A1) border-box;
+  border: 1px solid transparent;
+}
+
+.escape-room-table {
+  float: left;
+  padding: 20px;
+  border: 0px;
 }
 
 body,

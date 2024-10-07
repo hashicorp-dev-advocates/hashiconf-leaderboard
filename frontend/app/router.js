@@ -7,7 +7,6 @@ export default class Router extends EmberRouter {
 }
 
 Router.map(function () {
-  this.route('escape-room-ilm');
-  this.route('escape-room-slm');
+  this.route('escape-room');
   this.route('robots');
 });

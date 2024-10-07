@@ -1,0 +1,41 @@
+<div class="escape-room-background">
+    <Hds::AppFrame as |Frame|>
+        <Frame.Header>
+            <div class="escape-room-header">
+                <h1>Escape Room</h1>
+            </div>
+        </Frame.Header>
+        <Frame.Main>
+            <div class="escape-room-row">
+                <div class="escape-room-ilm-column">
+                    <h2 class="escape-room-ilm-header">Infrastructure Lifecycle Management</h2>
+                    <Hds::Table ...attributes class="escape-room-table" @model={{this.model.ilm}} @columns={{array (hash
+                        key=" rank" label="Rank" ) (hash key="name" label="Team name" ) (hash key="time" label="Time"
+                        align="right" ) }} @valign="middle">
+                        <:body as |B|>
+                            <B.Tr>
+                                <B.Td>{{B.data.rank}}</B.Td>
+                                <B.Td>{{B.data.name}}</B.Td>
+                                <B.Td @align="right">{{B.data.time}}</B.Td>
+                            </B.Tr>
+                        </:body>
+                    </Hds::Table>
+                </div>
+                <div class="escape-room-slm-column">
+                    <h2 class="escape-room-slm-header">Security Lifecycle Management</h2>
+                    <Hds::Table ...attributes class="escape-room-table" @model={{this.model.slm}} @columns={{array (hash
+                        key=" rank" label="Rank" ) (hash key="name" label="Team name" ) (hash key="time" label="Time"
+                        align="right" ) }} @valign="middle">
+                        <:body as |B|>
+                            <B.Tr>
+                                <B.Td>{{B.data.rank}}</B.Td>
+                                <B.Td>{{B.data.name}}</B.Td>
+                                <B.Td @align="right">{{B.data.time}}</B.Td>
+                            </B.Tr>
+                        </:body>
+                    </Hds::Table>
+                </div>
+            </div>
+        </Frame.Main>
+    </Hds::AppFrame>
+</div>
