@@ -22,14 +22,14 @@ func setupTeamHandler(_ *testing.T) (*Team, *httptest.ResponseRecorder) {
 		ID:         1,
 		Name:       "HashiFans",
 		Time:       200.6,
-		Activation: "ilm",
+		Activation: "ai",
 	}
 
 	testTeam2 := data.Team{
 		ID:         2,
 		Name:       "FastRunners",
 		Time:       100.5,
-		Activation: "slm",
+		Activation: "vpm",
 	}
 
 	c.On("GetTeam").Return(data.Teams{testTeam}, nil)
@@ -83,8 +83,8 @@ func TestReturnsTeamsByActivation(t *testing.T) {
 
 	r := httptest.NewRequest("GET", "/teams/activations/{name}", nil)
 
-	// set activation to slm
-	vars := map[string]string{"name": "slm"}
+	// set activation to vpm
+	vars := map[string]string{"name": "vpm"}
 	r = mux.SetURLVars(r, vars)
 
 	c.GetTeamsByActivation(rw, r)

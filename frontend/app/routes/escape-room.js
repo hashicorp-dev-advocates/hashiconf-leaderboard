@@ -5,8 +5,8 @@ import GetTeams from './leaderboard-api';
 export default class EscapeRoomRoute extends Route {
   async model() {
     return hash({
-      ilm: GetTeams("ilm"),
-      slm: GetTeams("slm")
+      ai: GetTeams("ai"),
+      vpm: GetTeams("vpm")
     });
   }
 }

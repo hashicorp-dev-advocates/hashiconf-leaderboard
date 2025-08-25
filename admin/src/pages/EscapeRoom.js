@@ -45,10 +45,10 @@ export default function EscapeRoom() {
             {errors.time && (
                 <p>Time must be in seconds and less than 20 minutes (1200 seconds)</p>
             )}
-            <label>Workflow</label>a
+            <label>Track</label>
             <select {...register("activation", { required: true })}>
-                <option value="ilm">ILM</option>
-                <option value="slm">SLM</option>
+                <option value="ai">AI</option>
+                <option value="vpm">VPM</option>
             </select>
             <input type="submit" />
         </form>

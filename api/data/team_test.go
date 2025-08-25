@@ -21,7 +21,7 @@ func TestTeamsDeserializeFromJSON(t *testing.T) {
 
 func TestTeamsSerializesToJSON(t *testing.T) {
 	c := Teams{
-		Team{ID: 1, Name: "test", Time: 120.12, Activation: "ilm"},
+		Team{ID: 1, Name: "test", Time: 120.12, Activation: "ai"},
 	}
 
 	d, err := c.ToJSON()
@@ -34,7 +34,7 @@ func TestTeamsSerializesToJSON(t *testing.T) {
 	assert.Equal(t, float64(1), cd[0]["id"])
 	assert.Equal(t, "test", cd[0]["name"])
 	assert.Equal(t, float64(120.12), cd[0]["time"])
-	assert.Equal(t, "ilm", cd[0]["activation"])
+	assert.Equal(t, "ai", cd[0]["activation"])
 }
 
 var teamsData = `
@@ -43,13 +43,13 @@ var teamsData = `
 		"id": 1,
 		"name": "HashiFans",
 		"time": 300.0,
-		"activation": "ilm"
+		"activation": "ai"
 	},
 	{
 		"id": 2,
 		"name": "Americano",
 		"price": 206.78,
-		"activation": "slm"
+		"activation": "vpm"
 	}
 ]
 `

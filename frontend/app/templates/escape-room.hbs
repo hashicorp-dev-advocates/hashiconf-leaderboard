@@ -7,9 +7,9 @@
         </Frame.Header>
         <Frame.Main>
             <div class="escape-room-row">
-                <div class="escape-room-ilm-column">
-                    <h2 class="escape-room-ilm-header">Infrastructure Lifecycle Management</h2>
-                    <Hds::Table ...attributes class="escape-room-table" @model={{this.model.ilm}} @columns={{array (hash
+                <div class="escape-room-ai-column">
+                    <h2 class="escape-room-ai-header">Artificial Intelligence</h2>
+                    <Hds::Table ...attributes class="escape-room-table" @model={{this.model.ai}} @columns={{array (hash
                         key=" rank" label="Rank" ) (hash key="name" label="Team name" ) (hash key="time" label="Time"
                         align="right" ) }} @valign="middle">
                         <:body as |B|>
@@ -21,9 +21,9 @@
                         </:body>
                     </Hds::Table>
                 </div>
-                <div class="escape-room-slm-column">
-                    <h2 class="escape-room-slm-header">Security Lifecycle Management</h2>
-                    <Hds::Table ...attributes class="escape-room-table" @model={{this.model.slm}} @columns={{array (hash
+                <div class="escape-room-vpm-column">
+                    <h2 class="escape-room-vpm-header">Vulnerability Patch Management</h2>
+                    <Hds::Table ...attributes class="escape-room-table" @model={{this.model.vpm}} @columns={{array (hash
                         key=" rank" label="Rank" ) (hash key="name" label="Team name" ) (hash key="time" label="Time"
                         align="right" ) }} @valign="middle">
                         <:body as |B|>
