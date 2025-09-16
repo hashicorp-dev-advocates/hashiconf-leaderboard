@@ -21,7 +21,7 @@ GET /teams/activations/{name}      │     GET /login (Authorization: username:p
 All infrastructure for the application is set up in `infrastructure/`
 using [HCP Terraform](https://app.terraform.io/app/hashicorp-team-da-beta/workspaces/leaderboard-infrastructure/runs).
 
-> Region is us-east-1.
+> Region is us-west-2 for 2025.
 
 ### Database
 
