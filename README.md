@@ -23,6 +23,11 @@ using [HCP Terraform](https://app.terraform.io/app/hashicorp-team-da-beta/worksp
 
 > Region is us-west-2 for 2025.
 
+The GitHub PAT is stored in HCP Terraform (env var) and requires the following access:
+
+- Read access to metadata
+- Read and Write access to actions variables
+
 ### Database
 
 The database uses AWS PostgreSQL on RDS in multi-az configuration.
