@@ -1,10 +1,14 @@
 <div class="robots-background">
     <Hds::AppFrame as |Frame|>
-        <Frame.Header>
-            <h1 class="robot-header">RoboRally</h1>
-        </Frame.Header>
         <Frame.Main>
             <div class="robot-box">
+                <div class="robot-header-row">
+                    <span>
+                        <span class="robot-header-1">RoboRally</span>
+                        <span class="robot-header-2">'25</span>
+                    </span>
+                    <span class="robot-header-3">Leaderboard</span>
+                </div>
                 <Hds::Table ...attributes class="robot-frame" @model={{this.model}} @columns={{array (hash key=" rank"
                     label="Rank" ) (hash key="name" label="Team name" ) (hash key="time" label="Time" align="right" ) }}
                     @valign="middle">
