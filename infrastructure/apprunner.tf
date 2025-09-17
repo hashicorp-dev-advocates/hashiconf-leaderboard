@@ -81,6 +81,8 @@ resource "aws_apprunner_service" "admin" {
   }
 }
 
+# these outputs stay here
+# as they depend on the apprunner services
 output "leaderboard_url" {
   value = aws_apprunner_service.frontend.service_url
 }
