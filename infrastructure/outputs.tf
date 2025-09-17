@@ -19,6 +19,14 @@ output "app_database" {
   sensitive = true
 }
 
+output "leaderboard_url" {
+  value = aws_apprunner_service.frontend.service_url
+}
+
+output "admin_url" {
+  value = aws_apprunner_service.admin.service_url
+}
+
 output "admin_logins" {
   value     = { for user in var.leaderboard_user_list : user => random_password.leaderboard[user].result }
   sensitive = true
