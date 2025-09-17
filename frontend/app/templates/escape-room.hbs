@@ -1,39 +1,43 @@
 <div class="escape-room-background">
     <Hds::AppFrame as |Frame|>
-        <Frame.Header>
-            <div class="escape-room-header">
-                <h1>Escape Room</h1>
-            </div>
-        </Frame.Header>
         <Frame.Main>
-            <div class="escape-room-row">
-                <div class="escape-room-ai-column">
-                    <h2 class="escape-room-ai-header">Artificial Intelligence</h2>
-                    <Hds::Table ...attributes class="escape-room-table" @model={{this.model.ai}} @columns={{array (hash
-                        key=" rank" label="Rank" ) (hash key="name" label="Team name" ) (hash key="time" label="Time"
-                        align="right" ) }} @valign="middle">
-                        <:body as |B|>
-                            <B.Tr>
-                                <B.Td>{{B.data.rank}}</B.Td>
-                                <B.Td>{{B.data.name}}</B.Td>
-                                <B.Td @align="right">{{B.data.time}}</B.Td>
-                            </B.Tr>
-                        </:body>
-                    </Hds::Table>
+            <div class="escape-room-box">
+                <div class="escape-room-header-row">
+                    <span>
+                        <span class="escape-room-header-1">Escape Room</span>
+                        <span class="escape-room-header-2">'25</span>
+                    </span>
+                    <span class="escape-room-header-3">Leaderboard</span>
                 </div>
-                <div class="escape-room-vpm-column">
-                    <h2 class="escape-room-vpm-header">Vulnerability Patch Management</h2>
-                    <Hds::Table ...attributes class="escape-room-table" @model={{this.model.vpm}} @columns={{array (hash
-                        key=" rank" label="Rank" ) (hash key="name" label="Team name" ) (hash key="time" label="Time"
-                        align="right" ) }} @valign="middle">
-                        <:body as |B|>
-                            <B.Tr>
-                                <B.Td>{{B.data.rank}}</B.Td>
-                                <B.Td>{{B.data.name}}</B.Td>
-                                <B.Td @align="right">{{B.data.time}}</B.Td>
-                            </B.Tr>
-                        </:body>
-                    </Hds::Table>
+                <div class="escape-room-row">
+                    <div class="escape-room-ai-column">
+                        <h2 class="escape-room-ai-header">Artificial Intelligence</h2>
+                        <Hds::Table ...attributes class="escape-room-table" @model={{this.model.ai}} @columns={{array (hash
+                            key=" rank" label="Rank" ) (hash key="name" label="Team name" ) (hash key="time" label="Time"
+                            align="right" ) }} @valign="middle">
+                            <:body as |B|>
+                                <B.Tr>
+                                    <B.Td>{{B.data.rank}}</B.Td>
+                                    <B.Td>{{B.data.name}}</B.Td>
+                                    <B.Td @align="right">{{B.data.time}}</B.Td>
+                                </B.Tr>
+                            </:body>
+                        </Hds::Table>
+                    </div>
+                    <div class="escape-room-vpm-column">
+                        <h2 class="escape-room-vpm-header">Vulnerability Patch Management</h2>
+                        <Hds::Table ...attributes class="escape-room-table" @model={{this.model.vpm}} @columns={{array (hash
+                            key=" rank" label="Rank" ) (hash key="name" label="Team name" ) (hash key="time" label="Time"
+                            align="right" ) }} @valign="middle">
+                            <:body as |B|>
+                                <B.Tr>
+                                    <B.Td>{{B.data.rank}}</B.Td>
+                                    <B.Td>{{B.data.name}}</B.Td>
+                                    <B.Td @align="right">{{B.data.time}}</B.Td>
+                                </B.Tr>
+                            </:body>
+                        </Hds::Table>
+                    </div>
                 </div>
             </div>
         </Frame.Main>

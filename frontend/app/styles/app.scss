@@ -13,6 +13,11 @@
   padding: 0;
 }
 
+.robots-background {
+  background-image: url(images/robots.png);
+  background-size: cover;
+}
+
 .robot-header-row {
   display: flex;
   justify-content: space-between;
@@ -82,19 +87,65 @@ footer {
   border: 1px solid transparent;
 }
 
-.robots-background {
-  background-image: url(images/robots.png);
-  background-size: cover;
+.escape-room-box {
+  box-sizing: border-box;
+  background: #000;
+  border-radius: 20px;
+  background: linear-gradient(#000, #000) padding-box,
+              linear-gradient(to right bottom, #2FA5DD, #4168B2, #754EA0, #F04D54, #FED70F) border-box;
+  border: 1px solid transparent;
+}
+
+.escape-room-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.escape-room-header-1 {
+  font-size: 36px;
+  font-weight: 450;
+  background: white;
+  padding: 10px;
+  margin-right:-1.0rem;
+  display: inline;
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -moz-text-fill-color: transparent;
+}
+
+.escape-room-header-2 {
+  font-size: 25px;
+  font-weight: 450;
+  background: white;
+  margin-left:0;
+  display: inline;
+  vertical-align:baseline;
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -moz-text-fill-color: transparent;
+}
+
+.escape-room-header-3 {
+  font-size: 25px;
+  font-weight: 200;
+  background: white;
+  margin-left:0;
+  text-align: right;
+  padding-right: 20px;
+  vertical-align:baseline;
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -moz-text-fill-color: transparent;
 }
 
 .escape-room-background {
   background-image: url(images/escape-room.png);
   background-size: cover;
-}
-
-.escape-room-header {
-  text-align: center;
-  font-size: 36px;
 }
 
 .escape-room-ai-header {
