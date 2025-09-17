@@ -80,3 +80,11 @@ resource "aws_apprunner_service" "admin" {
     }
   }
 }
+
+output "leaderboard_url" {
+  value = aws_apprunner_service.frontend.service_url
+}
+
+output "admin_url" {
+  value = aws_apprunner_service.admin.service_url
+}
