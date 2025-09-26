@@ -30,7 +30,7 @@ variable "client_cidr_blocks" {
 variable "postgres_db_version" {
   type        = string
   description = "PostgreSQL database version"
-  default     = "16.4"
+  default     = "16.8"
 }
 
 variable "db_instance_class" {
